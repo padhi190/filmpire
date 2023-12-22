@@ -5,6 +5,8 @@ import Sidebar from './Sidebar';
 import { useColorMode } from '../../utils/ThemeProvider';
 import { useMobile } from '../../utils';
 
+
+
 const NavBar = () => {
   const [mobileOpen, setMobileOpen] = useState(false)
   const isMobile = useMobile();
@@ -52,12 +54,13 @@ const NavBar = () => {
               anchor='right'
               open={mobileOpen}
               ModalProps={{ keepMounted: true }}
+              onClose={() => setMobileOpen(false)}
             >
-              <Sidebar setMobileOpen={setMobileOpen} />
+              <Sidebar />
             </Drawer>
           ) : (
               <Drawer variant='permanent' open>
-                <Sidebar setMobileOpen={setMobileOpen} />
+                <Sidebar />
               </Drawer>
           )}
 

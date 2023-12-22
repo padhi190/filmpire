@@ -4,10 +4,19 @@ import { Box } from '@mui/material';
 import { useMobile } from '../utils';
 import { ReactNode } from 'react';
 
-const Root = ({children} : {children?: ReactNode}) => {
-  const isMobile = useMobile()
+const Root = ({ children }: { children?: ReactNode }) => {
+  const isMobile = useMobile();
   return (
-    <Box sx={{marginLeft: isMobile ? '0' : '300px', marginTop: '80px' }}>
+    <Box
+      sx={{
+        marginLeft: isMobile ? '0' : '300px',
+        marginTop: '80px',
+        backgroundColor: (theme) => theme.palette.background.default,
+        minHeight: 'calc(100vh - 80px)',
+        color: (theme) => theme.palette.text.primary,
+        padding: '2rem',
+      }}
+    >
       <NavBar />
       {children ?? <Outlet />}
     </Box>
