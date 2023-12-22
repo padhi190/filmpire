@@ -1,13 +1,16 @@
 import { Brightness4, Brightness7, Menu } from '@mui/icons-material';
-import { AppBar, Avatar, Box, Button, Drawer, IconButton, Toolbar, useMediaQuery, useTheme } from '@mui/material';
+import { AppBar, Avatar, Box, Button, Drawer, IconButton, Toolbar, useTheme } from '@mui/material';
 import { useState } from 'react';
 import Sidebar from './Sidebar';
+import { useColorMode } from '../../utils/ThemeProvider';
+import { useMobile } from '../../utils';
 
 const NavBar = () => {
   const [mobileOpen, setMobileOpen] = useState(false)
-  const isMobile = useMediaQuery('(max-width:600px)');
+  const isMobile = useMobile();
   const theme = useTheme();
   const isDarkMode = theme.palette.mode === 'dark';
+  const {toggleColorMode} = useColorMode()
 
   return (
     <>
@@ -17,7 +20,7 @@ const NavBar = () => {
             height: 80,
             display: 'flex',
             justifyContent: 'space-between',
-            marginLeft: [null, null, '240px'],
+            marginLeft: [null, '300px', '300px'],
           }}
         >
           {isMobile && (
@@ -32,7 +35,7 @@ const NavBar = () => {
               <Menu />
             </IconButton>
           )}
-          <IconButton color="inherit" sx={{ ml: 1 }}>
+          <IconButton color="inherit" sx={{ ml: 1 }} onClick={toggleColorMode}>
             {isDarkMode ? <Brightness7 /> : <Brightness4 />}
           </IconButton>
           {!isMobile && 'Search...'}
