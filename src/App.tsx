@@ -1,12 +1,14 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { Home, Movies, Root } from './pages';
+import { loader as categoryLoader } from "./components/NavBar/Sidebar";
+import { loader as popularMoviesLoader } from "./pages/Home";
 import ThemeProvider from './utils/ThemeProvider';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Root />,
-    errorElement: <Root><p>Not found</p></Root>,
+    loader: categoryLoader,
     children: [
       {
         index: true,
