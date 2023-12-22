@@ -6,7 +6,7 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <Root />,
-    errorElement: <p>Not found</p>,
+    errorElement: <Root><p>Not found</p></Root>,
     children: [
       {
         index: true,
