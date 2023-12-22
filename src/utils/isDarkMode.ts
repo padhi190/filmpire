@@ -1,7 +1,9 @@
 import { useTheme } from '@mui/material'
 
 
-export const useDarkMode = () => {
+const useDarkMode = () => {
     const theme = useTheme();
     return theme.palette.mode === 'dark';
 }
+
+export default useDarkMode;
