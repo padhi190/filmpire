@@ -1,6 +1,6 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { Home, Movies, Root } from './pages';
-import { ThemeProvider, createTheme } from '@mui/material';
+import ThemeProvider from './utils/ThemeProvider';
 
 const router = createBrowserRouter([
   {
@@ -28,12 +28,10 @@ const router = createBrowserRouter([
   },
 ]);
 
-const theme = createTheme();
-
 function App() {
   return (
     <>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider>
         <RouterProvider router={router} />
       </ThemeProvider>
     </>
