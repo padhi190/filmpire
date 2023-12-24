@@ -1,4 +1,4 @@
-import { Link, useLoaderData } from 'react-router-dom';
+import { Link, NavLink, useLoaderData } from 'react-router-dom';
 import {
   Box,
   Divider,
@@ -6,10 +6,8 @@ import {
   ListItemButton,
   ListSubheader,
 } from '@mui/material';
-import { useDarkMode } from '../../utils';
 
 const Sidebar = () => {
-  const isDarkMode = useDarkMode();
   const data = useLoaderData() as IData;
 
   return (
@@ -22,10 +20,23 @@ const Sidebar = () => {
         />
       </Link>
       <Divider />
-      <List>
+      <List
+        sx={{
+          '& .active': {
+            backgroundColor: 'rgba(220,26,40)',
+            color: 'white',
+          },
+        }}
+      >
         <ListSubheader>Categories</ListSubheader>
         {data.genres.map((genre) => (
-            <ListItemButton key={genre.id} component={Link} to={`/genre/${genre.id}`}>{genre.name}</ListItemButton>
+          <ListItemButton
+            key={genre.id}
+            component={NavLink}
+            to={`/genre/${genre.id}`}
+          >
+            {genre.name}
+          </ListItemButton>
         ))}
       </List>
     </Box>
@@ -35,10 +46,10 @@ const Sidebar = () => {
 export default Sidebar;
 
 interface IData {
-    genres: {
-        id: number
-        name: string
-    }[]
+  genres: {
+    id: number;
+    name: string;
+  }[];
 }
 
 export async function loader() {
@@ -47,7 +58,7 @@ export async function loader() {
       import.meta.env.VITE_TMDB_KEY
     }`
   );
-  if(!res.ok) throw new Error("Error downloading genres") 
+  if (!res.ok) throw new Error('Error downloading genres');
 
-  return await res.json() as IData;
+  return (await res.json()) as IData;
 }

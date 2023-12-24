@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Sidebar from './Sidebar';
 import { useColorMode } from '../../utils/ThemeProvider';
 import { useMobile } from '../../utils';
+import SearchBar from '../SearchBar';
 
 
 
@@ -40,7 +41,7 @@ const NavBar = () => {
           <IconButton color="inherit" sx={{ ml: 1 }} onClick={toggleColorMode}>
             {isDarkMode ? <Brightness7 /> : <Brightness4 />}
           </IconButton>
-          {!isMobile && 'Search...'}
+          {!isMobile && <SearchBar />}
           <Button color='inherit'>
             <Avatar alt='Profile'/>
           </Button>
