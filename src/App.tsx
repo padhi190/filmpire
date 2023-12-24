@@ -1,7 +1,9 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { Home, Movies, Root } from './pages';
+import { Genres, Home, Movies, Root } from './pages';
 import { loader as categoryLoader } from "./components/NavBar/Sidebar";
 import { loader as popularMoviesLoader } from "./pages/Home";
+import { loader as movieLoader } from "./pages/Movies";
+import { loader as moviesByGenreLoader } from "./pages/Genres";
 import ThemeProvider from './utils/ThemeProvider';
 
 const router = createBrowserRouter([
@@ -16,7 +18,13 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: '/movies/:id',
+        path: 'genre/:id',
+        loader: moviesByGenreLoader,
+        element: <Genres />,
+      },
+      {
+        path: '/movie/:id',
+        loader: movieLoader,
         element: <Movies />,
       },
       {
