@@ -8,7 +8,7 @@ export const useColorMode = () => {
 }
 
 const ColorModeProvider = ({ children }: { children: ReactNode }) => {
-  const [mode, setMode] = useState<'light' | 'dark'>('light');
+  const [mode, setMode] = useState<'light' | 'dark'>('dark');
 
   const colorMode = {
     toggleColorMode: () =>
