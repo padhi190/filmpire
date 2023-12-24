@@ -3,7 +3,6 @@ import { IMovies } from '../../pages/Home';
 import { Movie } from './Movie';
 
 const MoviesList = ({ data }: { data: IMovies }) => {
-    console.log(data.results)
   return (
     <Grid container spacing={2}>
       {data.results.map((movie, i) => (

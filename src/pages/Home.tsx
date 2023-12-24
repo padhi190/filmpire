@@ -3,7 +3,6 @@ import MoviesList from '../components/Movies/MoviesList';
 
 const Home = () => {
   const data = useLoaderData() as IMovies;
-  console.log(data.results);
   return (
     <>
       <MoviesList data={data} />    

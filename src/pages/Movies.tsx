@@ -2,7 +2,6 @@ import { LoaderFunctionArgs, useLoaderData } from 'react-router-dom'
 
 const Movies = () => {
   const data = useLoaderData();
-  console.log(data);
   
   return (
     <div>Movies</div>

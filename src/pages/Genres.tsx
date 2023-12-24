@@ -4,7 +4,6 @@ import { IMovies } from './Home';
 
 const Genres = () => {
   const data = useLoaderData() as IMovies;
-  console.log(data);
   return <MoviesList data={data} />
 };
 
