@@ -6,6 +6,7 @@ import {
   ListItemButton,
   ListSubheader,
 } from '@mui/material';
+import { baseUrl, buildUrl } from '../../utils/buildUrl';
 
 const Sidebar = () => {
   const data = useLoaderData() as IData;
@@ -53,11 +54,8 @@ interface IData {
 }
 
 export async function loader() {
-  const res = await fetch(
-    `https://api.themoviedb.org/3/genre/movie/list?api_key=${
-      import.meta.env.VITE_TMDB_KEY
-    }`
-  );
+  const url = buildUrl(baseUrl + 'genre/movie/list')
+  const res = await fetch(url);
   if (!res.ok) throw new Error('Error downloading genres');
 
   return (await res.json()) as IData;

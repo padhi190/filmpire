@@ -15,6 +15,7 @@ import {
 } from '@mui/material';
 import { useMobile } from '../utils';
 import { ArrowBack } from '@mui/icons-material';
+import { baseUrl, buildUrl } from '../utils/buildUrl';
 
 interface IMovie {
   title: string;
@@ -41,7 +42,6 @@ interface IMovie {
 
 const Movies = () => {
   const data = useLoaderData() as IMovie;
-  console.log(data);
   const navigate = useNavigate();
   if (!data.title) {
     return <Typography variant="h5">Error fetching movie</Typography>;
@@ -162,11 +162,8 @@ export default Movies;
 
 export async function loader({ params }: LoaderFunctionArgs) {
   const { id } = params;
-  const res = await fetch(
-    `https://api.themoviedb.org/3/movie/${id}?api_key=${
-      import.meta.env.VITE_TMDB_KEY
-    }&append_to_response=credits`
-  );
+  const url = buildUrl(baseUrl + `movie/${id}`,{ 'append_to_response' : 'credits'});
+  const res = await fetch(url);
 
   return await res.json();
 }

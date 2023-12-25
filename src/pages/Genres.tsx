@@ -1,6 +1,7 @@
 import { LoaderFunctionArgs, useLoaderData } from 'react-router-dom';
 import MoviesList from '../components/Movies/MoviesList';
 import { IMovies } from './Home';
+import { baseUrl, buildUrl } from '../utils/buildUrl';
 
 const Genres = () => {
   const data = useLoaderData() as IMovies;
@@ -11,10 +12,7 @@ export default Genres;
 
 export async function loader({ params }: LoaderFunctionArgs) {
   const { id } = params;
-  const res = await fetch(
-    `https://api.themoviedb.org/3/discover/movie?api_key=${
-      import.meta.env.VITE_TMDB_KEY
-    }&with_genres=${id}`
-  );
+  const url = buildUrl(baseUrl + `discover/movie`, { 'with_genres' : id!})
+  const res = await fetch(url)
   return await res.json() as IMovies;
 }

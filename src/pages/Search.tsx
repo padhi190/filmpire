@@ -6,6 +6,7 @@ import {
 import { IMovies } from './Home';
 import MoviesList from '../components/Movies/MoviesList';
 import { Typography } from '@mui/material';
+import { baseUrl, buildUrl } from '../utils/buildUrl';
 
 const Search = () => {
   const data = useLoaderData() as IMovies;
@@ -26,12 +27,9 @@ export default Search;
 export async function loader({ request }: LoaderFunctionArgs) {
   const url = new URL(request.url);
   const searchTerm = url.searchParams.get('q');
+  const fetchUrl = buildUrl(baseUrl + 'search/movie', { 'query': searchTerm! });
 
-  const res = await fetch(
-    `https://api.themoviedb.org/3/search/movie?api_key=${
-      import.meta.env.VITE_TMDB_KEY
-    }&query=${searchTerm}`
-  );
+  const res = await fetch(fetchUrl);
   const data = await res.json();
   return data;
 }

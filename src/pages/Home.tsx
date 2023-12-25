@@ -1,5 +1,6 @@
 import { useLoaderData } from 'react-router-dom';
 import MoviesList from '../components/Movies/MoviesList';
+import { baseUrl, buildUrl } from '../utils/buildUrl';
 
 const Home = () => {
   const data = useLoaderData() as IMovies;
@@ -23,11 +24,8 @@ export interface IMovies {
 }
 
 export async function loader() {
-  const res = await fetch(
-    `https://api.themoviedb.org/3/movie/popular?api_key=${
-      import.meta.env.VITE_TMDB_KEY
-    }`
-  );
+  const url = buildUrl(baseUrl + 'movie/popular');
+  const res = await fetch(url);
   if (!res.ok) throw new Error('Error fetching movies list');
   return (await res.json()) as IMovies;
 }
