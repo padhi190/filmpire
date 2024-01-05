@@ -3,9 +3,11 @@ import NavBar from '../components/NavBar/NavBar';
 import { Box } from '@mui/material';
 import { useMobile } from '../utils';
 import { ReactNode } from 'react';
+import useAIButton from '../hooks/useAIButton';
 
 const Root = ({ children }: { children?: ReactNode }) => {
   const isMobile = useMobile();
+  useAIButton();
   return (
     <Box
       sx={{
