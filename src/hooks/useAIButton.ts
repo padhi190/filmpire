@@ -3,6 +3,17 @@ import { useEffect } from 'react';
 import { useColorMode } from '../utils';
 import { useNavigate } from 'react-router-dom';
 
+interface Command {
+  command: string;
+  query: string;
+  mode: 'dark' | 'light';
+  genreOrCategory: string;
+  genres: {
+    id: number,
+    name: string,
+  }[]
+}
+
 const useAIButton = () => {
   const { changeColorMode } = useColorMode();
   const navigate = useNavigate();
@@ -11,10 +22,10 @@ const useAIButton = () => {
     alanBtn({
       key: import.meta.env.VITE_ALAN_AI_KEY,
       showOverlayOnMicPermissionPrompt: true,
-      onCommand: (command) => {
+      //@ts-ignore
+      onCommand: (command: Command) => {
         if (command.command === 'changeMode') {
-            console.log(command.mode)
-            changeColorMode(command.mode);
+            if (command.mode) changeColorMode(command.mode);
         }
         if (command.command === 'search') {
           navigate(`search?q=${command.query}`);
